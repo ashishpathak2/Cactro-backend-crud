@@ -1,48 +1,200 @@
-This is a base node js project template, which anyone can use as it has been prepared, by keeping some of the most important code principles and project management recommendations. Feel free to change anything. 
+# 🚀 Cactro Backend CRUD – 
+---
+
+## 🧠 Project Structure
+
+```
+src/
+├── config/         # All configuration setups (e.g., dotenv)
+├── controllers/    # Receives HTTP data, handles request/response flow.
+├── middlewares/    # Interceptors for auth.
+├── models/         # Mongoose models.
+├── routes/         # API routing layer
+├── utils/          # Helper functions.
+└── index.js        # Entry point
+```
+
+### Folder Breakdown
+
+- **`config/`**  
+  Contains setup for environment variables, logging, and other configuration needs.  
+  Example: `server-config.js` for dotenv setup, Winston logger setup.
+
+- **`routes/`**  
+  Handles all route declarations and connects them to controllers and middleware.
+
+- **`middlewares/`**  
+  Custom middlewares like authenticators, validators, etc., that run before the controller.
+
+- **`controllers/`**  
+  The last middleware before the business logic. Handles request data and response formatting.
+
+- **`utils/`**  
+  Utility functions, constants, and custom error classes.
+
+---
+
+## 🛠️ Getting Started
+
+### 📦 Install Dependencies
+
+```bash
+npm install
+```
+
+### ⚙️ Environment Variables
+
+Create a `.env` file in the root directory and add the following:
+
+```env
+PORT=3000
+MONGO_URI=<your-mongodb-connection-string>
+JWT_SECRET=<your-jwt-secret>
+```
+
+---
+
+## 🚀 Running the Server
+
+### Development Mode
+
+```bash
+npm run dev
+```
+
+> This uses `nodemon` for hot reloading.
+
+---
+
+## 📡 Base API URL
+
+```
+BASE_URL = http://localhost:3000/api/v1
+```
+
+---
+
+## 🔐 Auth Routes
+
+### ✅ Register a New User
+
+**Endpoint:** `POST /api/v1/auth/register`
+
+#### Request Body
+
+```json
+{
+  "email": "test@example.com",
+  "password": "yourPassword"
+}
+```
+
+#### Response
+
+```json
+{
+  "success": true,
+  "message": "User created successfully",
+  "user": {
+    "email": "test@example.com"
+  },
+  "token": "<jwt_token>"
+}
+```
+
+---
+
+### ✅ Login a User
+
+**Endpoint:** `POST /api/v1/auth/login`
+
+#### Request Body
+
+```json
+{
+  "email": "test@example.com",
+  "password": "yourPassword"
+}
+```
+
+#### Response
+
+```json
+{
+  "success": true,
+  "message": "Login successful",
+  "user": {
+    "email": "test@example.com"
+  },
+  "token": "<jwt_token>"
+}
+```
+
+---
+
+## 📋 Task Routes
+
+> All task routes require a valid JWT token in the Authorization header.
+
+**Header:**
+
+```
+Authorization: Bearer <jwt_token>
+```
+
+### 🔨 Create Task
+
+**POST** `/api/v1/task/`
+
+#### Body:
+```json
+{
+  "title": "Sample Task",
+  "description": "Task description",
+  "status":"Anyone:- ['pending', 'in-progress', 'completed']," 
+}
+```
+
+### 📥 Get All Tasks
+
+**GET** `/api/v1/task/`
+
+### 📝 Update Task
+
+**PUT** `/api/v1/task/:id`
+
+#### Body:
+```json
+{
+  "title": "Updated Title"
+}w
+```
+
+### ❌ Delete Task
+
+**DELETE** `/api/v1/task/:id`
+
+---
+
+## 📄 API Testing Tools
+
+Use [Postman](https://www.postman.com/) to test the API endpoints.
+
+---
+
+## 📄 Postman Collection Link
+
+Use this - https://.postman.co/workspace/My-Workspace~abe6bad2-4e2e-488b-8896-ca2a0ee13ab1/collection/33665598-1ada8d7e-447e-4960-87f0-4eb6ca47599e?action=share&creator=33665598
+
+---
+
+## 📄 Deployment details 
+
+Deployed on RenderCloud's server, free tier instance.
+
+---
 
 
-`src` -> Inside the src folder all the actual source code regarding the project will reside, this will not include any kind of tests. (You might want to make separate tests folder)
+## 📬 Contributions
 
-Lets take a look inside the `src` folder
-
- - `config` -> In this folder anything and everything regarding any configurations or setup of a library or module will be done. For example: setting up `dotenv` so that we can use the environment variables anywhere in a cleaner fashion, this is done in the `server-config.js`. One more example can be to setup you logging library that can help you to prepare meaningful logs, so configuration for this library should also be done here. 
-
- - `routes` -> In the routes folder, we register a route and the corresponding middleware and controllers to it. 
-
- - `middlewares` -> they are just going to intercept the incoming requests where we can write our validators, authenticators etc. 
-
- - `controllers` -> they are kind of the last middlewares as post them you call you business layer to execute the budiness logic. In controllers we just receive the incoming requests and data and then pass it to the business layer, and once business layer returns an output, we structure the API response in controllers and send the output. 
-
- - `repositories` -> this folder contains all the logic using which we interact the DB by writing queries, all the raw queries or ORM queries will go here.
-
- - `services` -> contains the buiness logic and interacts with repositories for data from the database
-
- - `utils` -> contains helper methods, error classes etc.
-
-### Setup the project
-
- - Download this template from github and open it in your favourite text editor. 
- - Go inside the folder path and execute the following command:
-  ```
-  npm install
-  ```
- - In the root directory create a `.env` file and add the following env variables
-    ```
-        PORT=<port number of your choice>
-    ```
-    ex: 
-    ```
-        PORT=3000
-    ```
- - go inside the `src` folder and execute the following command:
-    ```
-      npx sequelize init
-    ```
- - By executing the above command you will get migrations and seeders folder along with a config.json inside the config folder. 
- - If you're setting up your development environment, then write the username of your db, password of your db and in dialect mention whatever db you are using for ex: mysql, mariadb etc
- - If you're setting up test or prod environment, make sure you also replace the host with the hosted db url.
-
- - To run the server execute
- ```
- npm run dev
- ```
+Feel free to open issues or submit pull requests if you find bugs or want to improve the project.
