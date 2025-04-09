@@ -1,7 +1,7 @@
 const {JsonWebTokenUtils} = require('../utils');
 
 const isAuthenticated = (req, res, next) => {
-  const authHeader = req.header('Authorization');
+  const authHeader = req.header.authorization;
 
   if (!authHeader || !authHeader.startsWith('Bearer ')) {
     return res.status(401).json({

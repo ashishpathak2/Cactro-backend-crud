@@ -139,7 +139,7 @@ BASE_URL = http://localhost:3000/api/v1
 **Header:**
 
 ```
-Authorization: Bearer <jwt_token>
+authorization: Bearer <jwt_token>
 ```
 
 ### 🔨 Create Task
